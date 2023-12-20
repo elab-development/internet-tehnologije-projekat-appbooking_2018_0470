@@ -15,4 +15,8 @@ class Apartment extends Model
         'capacity',
         'available',
     ];
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

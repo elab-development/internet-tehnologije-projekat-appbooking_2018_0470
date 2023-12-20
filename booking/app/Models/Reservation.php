@@ -14,4 +14,13 @@ class Reservation extends Model
         'check_in_date',
         'check_out_date',
     ];
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function apartment()
+    {
+        return $this->belongsTo(Apartment::class);
+    }
 }

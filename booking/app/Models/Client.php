@@ -17,7 +17,9 @@ class Client extends Model
         'email_verified_at',
         'phone',
         'password',
-
-        
     ];
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

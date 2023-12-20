@@ -17,7 +17,13 @@ class ApartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->word,
+            'description' => $this->faker->sentence,
+            'price' => $this->faker->randomFloat(2, 50, 500),
+            'capacity' => $this->faker->numberBetween(2, 8),
+            'available' => $this->faker->boolean,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

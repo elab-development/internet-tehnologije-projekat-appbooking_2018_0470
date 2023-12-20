@@ -17,7 +17,12 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'apartment_id' => $this->faker->numberBetween(1, 10), // Replace with a valid existing apartment_id
+            'client_id' => $this->faker->numberBetween(1, 10),    // Replace with a valid existing client_id
+            'check_in_date' => $this->faker->date(),
+            'check_out_date' => $this->faker->date(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
