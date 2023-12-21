@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationTestController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +26,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Route::resource('reservations', ReservationTestController::class);
+//Route::resource('reservations', ReservationController::class);
+
+
+Route::get('/clients/{id}', [ClientController::class, 'show'])->name('clients.show');
+Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+Route::get('/clients/{id}/reservations', [ClientReservationController::class, 'index'])->name('clients.reservations.index');
+
 Route::resource('reservations', ReservationController::class);
+//Route::resource('clients.reservations', ClientReservationController::class);
+Route::resource('clients.reservations', ClientReservationController::class)->only(['index']);
