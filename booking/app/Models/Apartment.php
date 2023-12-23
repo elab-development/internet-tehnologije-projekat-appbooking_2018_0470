@@ -14,6 +14,7 @@ class Apartment extends Model
         'price',
         'capacity',
         'available',
+        'bedrooms',
     ];
     public function reservation()
     {

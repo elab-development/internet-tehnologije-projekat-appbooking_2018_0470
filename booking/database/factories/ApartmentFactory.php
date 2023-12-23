@@ -21,6 +21,7 @@ class ApartmentFactory extends Factory
             'description' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2, 50, 500),
             'capacity' => $this->faker->numberBetween(2, 8),
+            'bedrooms' => $this->faker->numberBetween(1, 5),
             'available' => $this->faker->boolean,
             'created_at' => now(),
             'updated_at' => now(),
