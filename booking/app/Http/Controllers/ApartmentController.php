@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Apartment;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 class ApartmentController extends Controller
 {
     /**
@@ -12,8 +13,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments=Apartment::all();
+        //$apartments=Apartment::all();
+        $apartments = DB::table('apartments')->simplePaginate(8);
         return $apartments;
+        
 
     }
 

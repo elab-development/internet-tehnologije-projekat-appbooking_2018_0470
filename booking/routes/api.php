@@ -60,3 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
    Route::delete('/reservations', [ReservationController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });*/
+
+
+Route::get('/apartments', [ApartmentController::class, 'index']);
+Route::get('/reservations', [ReservationController::class, 'index']);

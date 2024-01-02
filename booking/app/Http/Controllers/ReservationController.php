@@ -15,8 +15,10 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations=Reservation::all();
-       // return ReservationResource::collection($reservations);
-    return new ReservationCollection($reservations);
+        //return ReservationResource::collection($reservations);
+        //return new ReservationCollection($reservations);
+        $filtered = $reservations->where('check_in_date', '>=', '2023-05-06');//->where('name', 'like', '%a%');
+        return $filtered;
     }
 
     /**
