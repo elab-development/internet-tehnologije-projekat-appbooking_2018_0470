@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Cache;
 class ClientController extends Controller
 {
     /**
@@ -12,8 +12,12 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients=Client::all();
-        return $clients;
+        /*$clients=Client::all();
+        return $clients;*/
+        $data=Cache::rememberForever('bigX',function(){
+            return Client::all();
+         });
+         return $data;
     }
 
     /**

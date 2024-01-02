@@ -22,5 +22,6 @@ Route::get('/greeting', function () {
     return 'Hello World';
 });
 
-Route::get('/clients', [ClientController::class, 'index']);
+//Route::get('/clients', [ClientController::class, 'index']);
 Route::get('/clients/{id}', [ClientController::class, 'show']);
+Route::get('/cache',[ClientController::class, 'index']);
