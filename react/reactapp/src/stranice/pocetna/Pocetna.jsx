@@ -1,4 +1,5 @@
 import Header from "../../komponente/header/Header"
+import MailLista from "../../komponente/mailLista/MailLista"
 import NavBar from "../../komponente/navBar/NavBar"
 import NekretnineLista from "../../komponente/nekretnineLista/NekretnineLista"
 import Osobine from "../../komponente/osobine/Osobine"
@@ -16,6 +17,7 @@ const Pocetna = () => {
         <NekretnineLista/>
         <h1 className="homeTitle">Privatni smeštaji kojima su gosti oduševljeni</h1>
         <PodesavanjaO/>
+        <MailLista />
        </div>
     </div>
   )
