@@ -1,3 +1,4 @@
+import Footer from "../../komponente/footer/Footer"
 import Header from "../../komponente/header/Header"
 import MailLista from "../../komponente/mailLista/MailLista"
 import NavBar from "../../komponente/navBar/NavBar"
@@ -18,6 +19,7 @@ const Pocetna = () => {
         <h1 className="homeTitle">Privatni smeštaji kojima su gosti oduševljeni</h1>
         <PodesavanjaO/>
         <MailLista />
+        <Footer/>
        </div>
     </div>
   )
