@@ -14,6 +14,24 @@
     justify-content: space-between;
 }
 
+.elementListeNavbar {
+    list-style: none; /* Uklanja tačkice iz liste */
+    margin: 0;
+    padding: 0;
+ }
+  
+.elementListeNavbar a {
+    text-decoration: none; /* Uklanja podvučenost od linkova */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #764290;
+    }
+}
+
 .logo{
     font-weight: 500;
 }
