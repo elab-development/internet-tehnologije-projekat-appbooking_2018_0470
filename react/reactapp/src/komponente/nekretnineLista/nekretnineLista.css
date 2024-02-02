@@ -28,3 +28,20 @@
     font-size: 14px;
     font-weight: 300;
 }
+
+.paginationButtons {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+.paginationButtons>button{
+    height: 40px;
+    background-color: #c281a6;
+    margin-right: 10px;
+    color: white;
+    font-weight:500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

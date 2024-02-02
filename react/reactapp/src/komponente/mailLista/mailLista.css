@@ -28,3 +28,14 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.mailButton>button{
+    height: 40px;
+    background-color: #c281a6;
+    color: white;
+    font-weight:500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
