@@ -20,7 +20,8 @@ const FeaturedProperties = () => {
                 src={
                   item.photos[0]
                     ? item.photos[0]
-                    : 'https://play-lh.googleusercontent.com/eJuvWSnbPwEWAQCYwl8i9nPJXRzTv94JSYGGrKIu0qeuG_5wgYtb982-2F_jOGtIytY'
+                    : 'https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o='
+                    
                 }
                 alt=''
                 className='fpImg'

@@ -10,7 +10,7 @@ const SearchItem = ({ item }) => {
         src={
           item.photos[0]
             ? item.photos[0]
-            : 'https://play-lh.googleusercontent.com/eJuvWSnbPwEWAQCYwl8i9nPJXRzTv94JSYGGrKIu0qeuG_5wgYtb982-2F_jOGtIytY'
+            : 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg'
         }
         alt={item.name}
         className='siImg'
