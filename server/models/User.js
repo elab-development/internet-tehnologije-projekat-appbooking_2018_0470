@@ -20,6 +20,18 @@ const UserSchema=new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    city: {
+        type: String,
+        required: true,
+    },
+    country: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
 
 },{timestamps:true});
 

@@ -12,6 +12,9 @@ export const register=async(req,res,next)=>{
             username:req.body.username,
             email:req.body.email,
             password:hash,
+            city:req.body.city,
+            phone:req.body.phone,
+            country:req.body.country,
         })
 
         await newUser.save()
