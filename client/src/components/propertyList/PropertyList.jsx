@@ -1,10 +1,15 @@
+import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import "./propertyList.css";
 
 const PropertyList = () => {
+
+
   const { data, loading, error } = useFetch(
     "/hotels/countByType"
   );
+  const itemsPerPage = 3;
+  const [currentPage, setCurrentPage] = useState(1);
 
   const images = [
     "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
@@ -13,26 +18,39 @@ const PropertyList = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg",
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
   ];
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentData = data ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
   return (
     <div className="pList">
       {loading ? (
-        "loading"
+        "Loading..."
       ) : (
         <>
-          {data &&
-            images.map((img,i) => (
-              <div className="pListItem" key={i}>
-                <img
-                  src={img}
-                  alt=""
-                  className="pListImg"
-                />
-                <div className="pListTitles">
-                  <h1>{data[i]?.type}</h1>
-                  <h2>{data[i]?.count} {data[i]?.type}</h2>
-                </div>
+          {currentData.map((item, i) => (
+            <div className="pListItem" key={i}>
+              <img src={images[i]} alt="" className="pListImg" />
+              <div className="pListTitles">
+                <h1>{item?.type}</h1>
+                <h2>{item?.count} {item?.type}</h2>
               </div>
-            ))}
+            </div>
+          ))}
+          <div className="paginationButtons">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={indexOfLastItem >= images.length}
+            >
+              Next
+            </button>
+          </div>
         </>
       )}
     </div>

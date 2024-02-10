@@ -29,3 +29,29 @@
   font-size: 14px;
   font-weight: 300;
 }
+
+.paginationButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.paginationButtons button {
+  height: 40px;
+  background-color: #007bff;
+  margin-right: 10px;
+  color: white;
+  font-weight:500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paginationButtons button:hover {
+  background-color: #0056b3;
+}
+
+.paginationButtons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

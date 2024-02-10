@@ -43,3 +43,8 @@ export const login=async(req,res,next)=>{
         next(err);
     }
 }
+
+export const logout = (req, res) => {
+    // Clear the cookie by setting it to an empty string and setting max age to 0
+    res.cookie('access_token', '', { httpOnly: true, maxAge: 0 }).status(200).send('Logout successful');
+  };

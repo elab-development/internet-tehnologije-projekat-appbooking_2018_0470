@@ -6,8 +6,9 @@ import axios from "axios";
 
 import "./navbar.css"; // Import your CSS file
 
+
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user,logout } = useContext(AuthContext);
   const [temp, setTemp] = useState(null);
   const navigate = useNavigate();
 
@@ -27,7 +28,11 @@ const Navbar = () => {
 
     getWeather();
   }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  const handleLogout = () => {
+    // Call the logout function from the context
+    logout();
+    // You can add additional cleanup or redirection here if needed
+  };
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -42,11 +47,15 @@ const Navbar = () => {
             </span>
             {temp && <span>{temp} °C</span>}
 
+            <button className="navButton" onClick={handleLogout} >
+              Logout
+            </button>
+
             {/* Add other user-related items here if needed */}
           </div>
         ) : (
           <div className="navItems">
-            <button className="navButton">Register</button>
+            <button className="navButton" onClick={() => navigate("/register")}>Register</button>
             <button
               className="navButton"
               onClick={() => navigate("/login")}
