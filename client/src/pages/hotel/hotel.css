@@ -14,13 +14,39 @@
   position: relative;
 }
 
+.filterWrapper{
+  position: absolute;
+  top: 10px;
+  right: 200;
+  border: none;
+  padding: 10px 20px;
+  background-color: #c281a6;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.filterWrapper>input{
+  width: 300px;
+  height: 20px;
+  padding: 10px;
+  border: none;
+  margin-right: 10px;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+
+
 .bookNow {
   position: absolute;
   top: 10px;
   right: 0;
   border: none;
   padding: 10px 20px;
-  background-color: #0071c2;
+  background-color: #c281a6;
   color: white;
   font-weight: bold;
   border-radius: 5px;
@@ -39,12 +65,12 @@
 }
 
 .hotelDistance {
-  color: #0071c2;
+  color: #5f3376;
   font-weight: 500;
 }
 
 .hotelPriceHighlight {
-  color: #008009;
+  color: #549658;
   font-weight: 500;
 }
 
@@ -93,16 +119,20 @@
   font-size: 18px;
   color: #555;
 }
+
 .hotelDetailsPrice > span {
   font-size: 14px;
 }
+
 .hotelDetailsPrice > h2 {
   font-weight: 300;
 }
+
 .hotelDetailsPrice > button {
   border: none;
   padding: 10px 20px;
-  background-color: #0071c2;
+  background-color: #c281a6
+  ;
   color: white;
   font-weight: bold;
   cursor: pointer;
