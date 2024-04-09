@@ -41,11 +41,9 @@ const AuthReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
-  
+
   useEffect(() => {
-      
     localStorage.setItem("user", JSON.stringify(state.user));
-  
   }, [state.user]);
   const logout = () => {
     // You can perform additional logout actions here, such as clearing local storage
