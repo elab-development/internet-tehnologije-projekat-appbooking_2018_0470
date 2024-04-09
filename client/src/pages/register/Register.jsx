@@ -34,42 +34,20 @@ const Register = () => {
     }
   };
 
-
   const [country, setCountry] = useState([]);
-    useEffect(() => {
-        axios({
-          method: "GET",
-          url:
-            "https://restcountries.com/v3.1/all",
-        })
-          .then((response) => {
-            console.log(response.data[0].name.common);
-            setCountry(response.data);
-            
-          })
-          .catch((error) => {
-            console.log(error);
-         });
-     }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://restcountries.com/v3.1/all",
+    })
+      .then((response) => {
+        console.log(response.data[0].name.common);
+        setCountry(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="register">
@@ -110,21 +88,21 @@ const Register = () => {
           className="rInput"
         />
         <select
-  className="rInput" // Use the same style class as other inputs
-  name="country"
-  id="country"
-  onChange={handleChange}
->
-  {country.map((d) => (
-    <option
-      className="rInput" // Use the same style class as other inputs
-      value={d.name.common}
-      key={d.name.common}
-    >
-      {d.name.common}
-    </option>
-  ))}
-</select>
+          className="rInput" // Use the same style class as other inputs
+          name="country"
+          id="country"
+          onChange={handleChange}
+        >
+          {country.map((d) => (
+            <option
+              className="rInput" // Use the same style class as other inputs
+              value={d.name.common}
+              key={d.name.common}
+            >
+              {d.name.common}
+            </option>
+          ))}
+        </select>
 
         <button disabled={loading} onClick={handleRegister} className="rButton">
           Register
@@ -136,5 +114,3 @@ const Register = () => {
 };
 
 export default Register;
-
-

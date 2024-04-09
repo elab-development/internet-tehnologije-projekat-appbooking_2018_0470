@@ -1,5 +1,4 @@
-
-import { pdf, Text, View, Document, Page } from '@react-pdf/renderer';
+import { pdf, Text, View, Document, Page } from "@react-pdf/renderer";
 import "./hotel.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
@@ -12,13 +11,13 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import React,{ useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
-
+import HotelRatingForm from "../../components/form/HotelRatingForm";
 
 const Hotel = () => {
   const location = useLocation();
@@ -26,6 +25,8 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [userHotelRating, setUserHotelRating] = useState(null);
+  const [hotelRating, setHotelRating] = useState(null);
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -38,7 +39,9 @@ const Hotel = () => {
     return diffDays;
   }
 
-  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dates[0]?.endDate
+    ? dayDifference(dates[0].endDate, dates[0].startDate)
+    : 0;
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -66,7 +69,7 @@ const Hotel = () => {
   };
 
   const exportToPDF = async () => {
-    const fileName = 'hotel_document.pdf';
+    const fileName = "hotel_document.pdf";
 
     // Render React component to PDF
     const MyDocument = () => (
@@ -90,7 +93,7 @@ const Hotel = () => {
     const blob = await pdf(<MyDocument />).toBlob();
 
     // Create a link element and trigger download
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = fileName;
     document.body.appendChild(link);
@@ -98,11 +101,34 @@ const Hotel = () => {
     document.body.removeChild(link);
   };
 
+  const handleReviewSubmitted = (newRating) => {
+    setUserHotelRating(newRating);
+  };
+
+  useEffect(() => {
+    const fetchHotelRating = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8800/api/ratings/${id}/rating`
+        );
+        const ratingData = await response.json();
+        setHotelRating(ratingData.averageRating);
+      } catch (error) {
+        console.error("Error fetching hotel rating:", error);
+        setHotelRating(null);
+      }
+    };
+
+    fetchHotelRating();
+  }, [id, userHotelRating]);
+
   return (
     <div>
       <Navbar />
       <Header type="list" />
-      {loading ? ("loading") : (
+      {loading ? (
+        "loading"
+      ) : (
         <div className="hotelContainer">
           {open && (
             <div className="slider">
@@ -117,8 +143,11 @@ const Hotel = () => {
                 onClick={() => handleMove("l")}
               />
               <div className="sliderWrapper">
-                <img src={data.photos[slideNumber]}
-                 alt="" className="sliderImg" />
+                <img
+                  src={data.photos[slideNumber]}
+                  alt=""
+                  className="sliderImg"
+                />
               </div>
               <FontAwesomeIcon
                 icon={faCircleArrowRight}
@@ -128,8 +157,14 @@ const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
-            <h1 className="hotelTitle">{data.name}</h1>
+            <div className="hotelFormAndTitle">
+              <h1 className="hotelTitle">{data.name}</h1>
+              <HotelRatingForm
+                hotelId={id}
+                userId={user.id}
+                onReviewSubmitted={handleReviewSubmitted}
+              />
+            </div>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
               <span>{data.address}</span>
@@ -138,7 +173,8 @@ const Hotel = () => {
               Excellent location – {data.distance}m from center
             </span>
             <span className="hotelPriceHighlight">
-              Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
+              Book a stay over ${data.cheapestPrice} at this property and get a
+              free airport taxi
             </span>
             <div className="hotelImages">
               {data.photos?.map((photo, i) => (
@@ -155,11 +191,15 @@ const Hotel = () => {
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
                 <h1 className="hotelTitle">{data.title}</h1>
-                <p className="hotelDesc">
-                  {data.desc}
-                </p>
+                <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
+                <h3>
+                  Hotel Rating:{" "}
+                  {hotelRating !== null
+                    ? hotelRating.toFixed(1)
+                    : "Not rated yet"}
+                </h3>
                 <h1>Perfect for a {days}-night stay!</h1>
                 <span>
                   Located in the real heart of Krakow, this property has an
@@ -170,17 +210,18 @@ const Hotel = () => {
                   nights)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
-                <button onClick={exportToPDF}>Export to PDF</button> {/* Promenjeno ovo dugme */}
+                <button onClick={exportToPDF}>Export to PDF</button>{" "}
+                {/* Promenjeno ovo dugme */}
               </div>
             </div>
           </div>
           <MailList />
           <Footer />
-        </div>)}
+        </div>
+      )}
       {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };
-
 
 export default Hotel;
